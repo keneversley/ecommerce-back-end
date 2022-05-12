@@ -13,12 +13,11 @@ router.get('/', (req, res) => {
       }
     }
   )
-  .then(tagData => res.json(tagData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
-  
+    .then(tagData => res.json(tagData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.get('/:id', (req, res) => {
@@ -32,11 +31,11 @@ router.get('/:id', (req, res) => {
       model: Product
     }
   })
-  .then(tagData => res.json(tagData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(tagData => res.json(tagData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -44,16 +43,16 @@ router.post('/', (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name
   })
-  .then(tagData => res.json(tagData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(tagData => res.json(tagData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Tag.update (
+  Tag.update(
     {
       tag_name: req.body.tag_name
     },
@@ -61,11 +60,10 @@ router.put('/:id', (req, res) => {
       where: {
         id: req.params.id
       }
-
     })
     .then(tagData => {
       if (!tagData) {
-        res.statuts(404).json({ message: 'No Tag found with that ID.'});
+        res.status(404).json({ message: 'No Tag found with that ID.' });
         return;
       }
       res.json(tagData);
@@ -73,8 +71,7 @@ router.put('/:id', (req, res) => {
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
-    })
-  
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -84,17 +81,17 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then(tagData => {
-    if (!tagData) {
-      res.status(404).json ({ message: 'No Tag found by that ID.'});
-      return;
-    }
-    res.json(tagData);
-  })
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(tagData => {
+      if (!tagData) {
+        res.status(404).json({ message: 'No Tag found by that ID.' });
+        return;
+      }
+      res.json(tagData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
